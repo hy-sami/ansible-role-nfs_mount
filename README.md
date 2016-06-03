@@ -2,7 +2,7 @@
 ansible-role-nfs_mount
 =========
 
-Mounts NFS
+Mounts NFS 
 
 Requirements
 ------------
@@ -12,7 +12,7 @@ An NFS server
 Role Variables
 --------------
 
-For example:
+all:
 <pre>
 
 nfs_mount_point:
