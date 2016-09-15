@@ -55,4 +55,4 @@
         state="{{ item.state | default('mounted') }}"
         opts="{{ item.opts | default('defaults') }}"
   with_items: "{{ nfs_mounts }}"
-when: nfs_mounts is defined and nfs_mounts.0 != {} and nfs_mount is not defined
+  when: nfs_mounts is defined and nfs_mounts.0 != {} and nfs_mount is not defined
