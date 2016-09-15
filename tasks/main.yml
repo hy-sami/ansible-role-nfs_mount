@@ -38,3 +38,21 @@
 
 - name: reloading mount points
   command: /usr/bin/mount -a
+
+
+## new method with the mount module
+
+- name: Create directories (if they do not exist) if nfs_mounts is defined
+  file: path={{ item.name }} state=directory mode=0755
+  with_items: "{{ nfs_mounts }}"
+  when: nfs_mounts is defined and nfs_mounts.0 != {} and nfs_mount is not defined
+
+- name: add mountpoints if nfs_mounts is defined and nfs_mount is not
+  mount:
+        fstype="{{ item.fstype | default('nfs4') }}"
+        name="{{ item.name }}"  
+        src="{{ item.src }}"  
+        state="{{ item.state | default('mounted') }}"
+        opts="{{ item.opts | default('defaults') }}"
+  with_items: "{{ nfs_mounts }}"
+when: nfs_mounts is defined and nfs_mounts.0 != {} and nfs_mount is not defined
